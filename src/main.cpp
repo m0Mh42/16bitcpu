@@ -19,6 +19,10 @@ typedef enum {
     LDB,
     LDC,
     LDD,
+    PSA,
+    PSB,
+    PSC,
+    PSD,
     HLT
 } InstructionSet;
 
@@ -28,6 +32,10 @@ enum InstructionCode {
     LDB_S,
     LDC_S,
     LDD_S,
+    PSA_S,
+    PSB_S,
+    PSC_S,
+    PSD_S,
     HLT_S,
     INV_S = 0xFFFF
 };
@@ -56,6 +64,10 @@ InstructionCode instrhash(string const& instr){
     if (instr == "LDB") return LDB_S;
     if (instr == "LDC") return LDC_S;
     if (instr == "LDD") return LDD_S;
+    if (instr == "PSA") return PSA_S;
+    if (instr == "PSB") return PSB_S;
+    if (instr == "PSC") return PSC_S;
+    if (instr == "PSD") return PSD_S;
     if (instr == "HLT") return HLT_S;
     return INV_S;
 };
@@ -144,6 +156,34 @@ void Compile(string* program, int& program_length){
                             CompileErr(i);
                         }
                         break;
+                    case PSA_S:
+                        if (IsDigit(*(program + i + 1)) || IsHex(*(program + i + 1))){
+                            ram[++ip] = PSA;
+                            break;
+                        } else {
+                            CompileErr(i);
+                        }
+                    case PSB_S:
+                        if (IsDigit(*(program + i + 1)) || IsHex(*(program + i + 1))){
+                            ram[++ip] = PSB;
+                            break;
+                        } else {
+                            CompileErr(i);
+                        }
+                    case PSC_S:
+                        if (IsDigit(*(program + i + 1)) || IsHex(*(program + i + 1))){
+                            ram[++ip] = PSC;
+                            break;
+                        } else {
+                            CompileErr(i);
+                        }
+                    case PSD_S:
+                        if (IsDigit(*(program + i + 1)) || IsHex(*(program + i + 1))){
+                            ram[++ip] = PSD;
+                            break;
+                        } else {
+                            CompileErr(i);
+                        }
                     case HLT_S:
                         ram[++ip] = HLT;
                         break;
@@ -170,6 +210,26 @@ void eval(short int instr){
         case LDD:
             reg[D] = ram[++ip];
             break;
+        case PSA: {
+            unsigned short int addr = ram[++ip];
+            ram[addr] = reg[A];
+            break;
+                  }
+        case PSB: {
+            unsigned short int addr = ram[++ip];
+            ram[addr] = reg[B];
+            break;
+                  }
+        case PSC: {
+            unsigned short int addr = ram[++ip];
+            ram[addr] = reg[C];
+            break;
+                  }
+        case PSD: {
+            unsigned short int addr = ram[++ip];
+            ram[addr] = reg[D];
+            break;
+                  }
         case HLT:
             run = false;
             cout << "HLT" << endl;
@@ -203,6 +263,11 @@ int main(int argc, char* argv[]){
         eval(fetch());
         ip++;
     }
+
+    cout << "0x4000 " << ram[0x4000] << endl;
+    cout << "0x4001 " << ram[0x4001] << endl;
+    cout << "0x4002 " << ram[0x4002] << endl;
+    cout << "0x4003 " << ram[0x4003] << endl;
 
     return 0;
 }
