@@ -54,7 +54,7 @@ typedef enum {
     A, B, C, D,
     IP, LOS,
     REG_C
-} Registers; 
+} Registers;
 
 enum RegistersCode {
     A_S = 0, B_S, C_S, D_S,
@@ -132,19 +132,19 @@ void CheckNumSyntax(string* program, int i, InstructionSet instr){
 void Compile(string* program, int& program_length){
     ip = 0xFFFF;
     for (int i = 0; i < program_length; i++){
-            string instr = *(program + i); 
+            string instr = *(program + i);
             if (IsDigit(instr)){
                 stringstream num(instr);
                 short int unum;
                 num >> unum;
                 ram[++ip] = unum;
                 continue;
-            } 
+            }
             if (IsHex(instr)){
                 unsigned short int num;
                 num = stoi(instr, 0, 16);
                 ram[++ip] = num;
-            } 
+            }
             else if (instrhash(instr) != INV_S){
                 switch(instrhash(instr)){
                     case NOP_S:
@@ -335,7 +335,7 @@ int main(int argc, char* argv[]){
     }
 
     string* program;
-    
+
     File file_o;
     program = file_o.Read(argv[1]);
 
