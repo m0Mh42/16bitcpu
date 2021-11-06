@@ -1,6 +1,4 @@
-//
 // 16 bit cpu emulation
-//
 
 #include <iostream>
 #include <cstring>
