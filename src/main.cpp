@@ -231,7 +231,7 @@ void eval(short int instr){
             unsigned short int addr = ram[++ip];
             ram[addr] = reg[A];
             if (debug){
-                cout << "PUSH " << reg[A] << " TO ADDR " << addr << endl;
+                cout << "PUSH " << reg[A] << " TO ADDR 0x" << std::hex << addr << std::dec << endl;
             }
             break;
                   }
@@ -239,7 +239,7 @@ void eval(short int instr){
             unsigned short int addr = ram[++ip];
             ram[addr] = reg[B];
             if (debug){
-                cout << "PUSH " << reg[B] << " TO ADDR " << addr << endl;
+                cout << "PUSH " << reg[B] << " TO ADDR 0x" << std::hex << addr << std::dec << endl;
             }
             break;
                   }
@@ -247,7 +247,7 @@ void eval(short int instr){
             unsigned short int addr = ram[++ip];
             ram[addr] = reg[C];
             if (debug){
-                cout << "PUSH " << reg[C] << " TO ADDR " << addr << endl;
+                cout << "PUSH " << reg[C] << " TO ADDR 0x" << std::hex << addr << std::dec << endl;
             }
             break;
                   }
@@ -255,7 +255,7 @@ void eval(short int instr){
             unsigned short int addr = ram[++ip];
             ram[addr] = reg[D];
             if (debug){
-                cout << "PUSH " << reg[D] << " TO ADDR " << addr << endl;
+                cout << "PUSH " << reg[D] << " TO ADDR 0x" << std::hex << addr << std::dec << endl;
             }
             break;
                   }
